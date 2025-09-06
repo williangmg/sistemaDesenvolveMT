@@ -1,4 +1,4 @@
-import DataNascimento from "./DataNascimento";
+import Idade from "./Idade";
 import InputLocalDesaparecimento from "./InputLocalDesaparecimento";
 import SelectSexo from "./SelectSexo";
 
@@ -15,9 +15,9 @@ export const MaisFiltros = ({ searchParams, updateParam }) => {
         onChange={(e) => updateParam("local_desaparecimento", e.target.value)}
       />
 
-      <DataNascimento
-        value={searchParams.data_nascimento}
-        onChange={(e) => updateParam("data_nascimento", e.target.value)}
+      <Idade
+        value={searchParams.idade}
+        onChange={(e) => updateParam("idade", e.target.value)}
       />
     </div>
   );
