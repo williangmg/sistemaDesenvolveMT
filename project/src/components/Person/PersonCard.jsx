@@ -32,7 +32,11 @@ export const PersonCard = ({ person }) => {
         </div>
 
         <div className="absolute top-3 right-3">
-          <BarraStatus status={person.status} size="small" />
+
+          <BarraStatus
+            status={person.ultimaOcorrencia.dataLocalizacao}
+            size="small"
+          />
         </div>
       </div>
 

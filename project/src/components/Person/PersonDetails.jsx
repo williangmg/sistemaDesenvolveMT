@@ -25,7 +25,7 @@ export const PersonDetails = ({ person }) => {
           <img
             src={person.urlFoto}
             alt={`${person.nome} ${person.sobrenome}`}
-            className="w-full h-64 md:h-80 object-cover"
+            className="w-full max-h-80 object-contain bg-gray-200 mx-auto"
           />
         ) : (
           <div className="w-full h-64 md:h-80 bg-gray-200 flex items-center justify-center">
@@ -34,7 +34,10 @@ export const PersonDetails = ({ person }) => {
         )}
 
         <div className="absolute top-4 right-4">
-          <BarraStatus status={person.status} size="large" />
+          <BarraStatus
+            status={person.ultimaOcorrencia.dataLocalizacao}
+            size="large"
+          />
         </div>
       </div>
 
