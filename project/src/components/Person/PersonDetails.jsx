@@ -1,5 +1,5 @@
 import { Calendar, MapPin, User, Eye } from "lucide-react";
-import { StatusBadge } from "../UI/StatusBadge";
+import { BarraStatus } from "../UI/BarraStatus";
 import { formatDate, formatDateTime } from "../../utils/masks";
 
 export const PersonDetails = ({ person }) => {
@@ -34,7 +34,7 @@ export const PersonDetails = ({ person }) => {
         )}
 
         <div className="absolute top-4 right-4">
-          <StatusBadge status={person.status} size="large" />
+          <BarraStatus status={person.status} size="large" />
         </div>
       </div>
 

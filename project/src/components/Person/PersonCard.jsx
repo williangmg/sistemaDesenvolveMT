@@ -1,7 +1,7 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import { Calendar, MapPin, User } from "lucide-react";
-import { StatusBadge } from "../UI/StatusBadge";
+import { BarraStatus } from "../UI/BarraStatus";
 import { formatDate } from "../../utils/masks";
 
 export const PersonCard = ({ person }) => {
@@ -15,7 +15,7 @@ export const PersonCard = ({ person }) => {
           <img
             src={person.urlFoto}
             alt={`${person.nome} ${person.sobrenome}`}
-            className="w-full h-48 object-cover group-hover:scale-105 transition-transform duration-300"
+            className="w-full h-64 object-cover rounded-t-lg"
             onError={(e) => {
               e.target.style.display = "none";
               e.target.nextSibling.style.display = "flex";
@@ -24,7 +24,7 @@ export const PersonCard = ({ person }) => {
         ) : null}
 
         <div
-          className={`w-full h-48 bg-gray-200 flex items-center justify-center ${
+          className={`w-full h-64 bg-gray-200 flex items-center justify-center ${
             person.urlFoto ? "hidden" : "flex"
           }`}
         >
@@ -32,7 +32,7 @@ export const PersonCard = ({ person }) => {
         </div>
 
         <div className="absolute top-3 right-3">
-          <StatusBadge status={person.status} size="small" />
+          <BarraStatus status={person.status} size="small" />
         </div>
       </div>
 
