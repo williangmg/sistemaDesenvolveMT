@@ -7,7 +7,7 @@ export const usePeople = (searchParams = {}) => {
   const [error, setError] = useState(null);
   const [pagination, setPagination] = useState({
     page: 1,
-    limit: 4,
+    limit: 10,
     totalRegistros: 0,
     totalPaginas: 1,
   });
@@ -20,8 +20,8 @@ export const usePeople = (searchParams = {}) => {
       const response = await api.fetchPeople({
         ...searchParams,
         ...params,
-        pagina: params.page != null ? params.page : pagination.page - 1,
-        porPagina: params.limit || pagination.limit,
+        pagina: params.page != null ? params.page : pagination.page ,
+        porPagina:10,
       });
 
       setPeople(response.content || []);
