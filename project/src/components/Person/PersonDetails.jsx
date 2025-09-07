@@ -75,11 +75,6 @@ export const PersonDetails = ({ person }) => {
           />
         </div>
 
-        <InfoItem
-          icon={MapPin}
-          label="Local do desaparecimento"
-          value={person.local_desaparecimento}
-        />
         <div className="space-y-4">
           <InfoItem
             icon={Eye}
