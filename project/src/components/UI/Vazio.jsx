@@ -1,7 +1,7 @@
 import React from 'react';
 import { Search } from 'lucide-react';
 
-export const EmptyState = ({ title = 'Nenhum registro encontrado', description = 'Tente ajustar os filtros de busca ou verifique os termos utilizados.' }) => {
+export const Vazio = ({ title = 'Nenhum registro encontrado', description = 'Tente ajustar os filtros de busca ou verifique os termos utilizados.' }) => {
   return (
     <div className="text-center py-12">
       <Search className="h-16 w-16 text-gray-300 mx-auto mb-4" />

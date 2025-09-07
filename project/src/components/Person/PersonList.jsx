@@ -1,5 +1,5 @@
 import { PersonCard } from "./PersonCard";
-import { EmptyState } from "../UI/EmptyState";
+import { Vazio } from "../UI/Vazio";
 
 export const PersonList = ({ people, loading }) => {
   if (loading) {
@@ -26,7 +26,7 @@ export const PersonList = ({ people, loading }) => {
   }
 
   if (!people || people.length === 0) {
-    return <EmptyState />;
+    return <Vazio />;
   }
 
   return (
