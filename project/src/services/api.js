@@ -52,24 +52,15 @@ export const api = {
     }
   },
 
-  async submitInformation(data) {
+  async submitInformation(formData) {
     try {
-      const formData = new FormData();
-
-      Object.entries(data).forEach(([key, value]) => {
-        if (key === "fotos" && Array.isArray(value)) {
-          value.forEach((file) => {
-            formData.append("fotos", file);
-          });
-        } else if (value !== undefined && value !== null) {
-          formData.append(key, String(value));
+      const response = await fetch(
+        `${API_BASE_URL}/ocorrencias/informacoes-desaparecido`,
+        {
+          method: "POST",
+          body: formData,
         }
-      });
-
-      const response = await fetch(`${API_BASE_URL}/informacoes`, {
-        method: "POST",
-        body: formData,
-      });
+      );
 
       await handleApiError(response);
       return await response.json();
