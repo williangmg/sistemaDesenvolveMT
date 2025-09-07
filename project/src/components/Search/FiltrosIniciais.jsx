@@ -1,7 +1,6 @@
 import React from "react";
 import { Search, Filter } from "lucide-react";
 import InputNome from "./InputNome";
-import InputSobrenome from "./InputSobrenome";
 import SelectStatus from "./SelectStatus";
 
 export const FiltrosIniciais = ({
@@ -27,15 +26,10 @@ export const FiltrosIniciais = ({
         </button>
       </div>
 
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 gap-4">
         <InputNome
           value={searchParams.nome}
           onChange={(e) => updateParam("nome", e.target.value)}
-        />
-
-        <InputSobrenome
-          value={searchParams.sobrenome}
-          onChange={(e) => updateParam("sobrenome", e.target.value)}
         />
 
         <SelectStatus

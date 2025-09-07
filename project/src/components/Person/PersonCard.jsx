@@ -14,7 +14,7 @@ export const PersonCard = ({ person }) => {
         {person.urlFoto ? (
           <img
             src={person.urlFoto}
-            alt={`${person.nome} ${person.sobrenome}`}
+            alt={`${person.nome}`}
             className="w-full h-64 object-cover rounded-t-lg"
             onError={(e) => {
               e.target.style.display = "none";
@@ -42,7 +42,7 @@ export const PersonCard = ({ person }) => {
 
       <div className="p-6">
         <h3 className="text-xl font-semibold text-gray-800 mb-3 group-hover:text-blue-600 transition-colors">
-          {person.nome} {person.sobrenome}
+          {person.nome} 
         </h3>
 
         <div className="space-y-2">

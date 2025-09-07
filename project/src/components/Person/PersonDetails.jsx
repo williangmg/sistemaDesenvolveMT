@@ -24,7 +24,7 @@ export const PersonDetails = ({ person }) => {
         {person.urlFoto ? (
           <img
             src={person.urlFoto}
-            alt={`${person.nome} ${person.sobrenome}`}
+            alt={`${person.nome}`}
             className="w-full max-h-80 object-contain bg-gray-200 mx-auto"
           />
         ) : (
@@ -44,7 +44,7 @@ export const PersonDetails = ({ person }) => {
       <div className="p-6">
         <div className="mb-6">
           <h1 className="text-3xl font-bold text-gray-800 mb-2">
-            {person.nome} {person.sobrenome}
+            {person.nome}
           </h1>
           <p className="text-gray-600">
             Registrado em {formatDateTime(person.created_at)}

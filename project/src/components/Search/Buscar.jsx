@@ -7,7 +7,6 @@ export const Buscar = ({ onSearch, loading = false }) => {
   const [expansivel, setExpansivel] = useState(false);
   const [parametrosBusca, setParametrosBusca] = useState({
     nome: "",
-    sobrenome: "",
     sexo: "",
     status: "",
     local_desaparecimento: "",
@@ -34,7 +33,6 @@ export const Buscar = ({ onSearch, loading = false }) => {
       sexo: "",
       status: "",
       nome: "",
-      sobrenome: "",
       local_desaparecimento: "",
     };
     setParametrosBusca(clearedParams);
