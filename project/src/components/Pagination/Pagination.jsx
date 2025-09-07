@@ -10,29 +10,32 @@ export const Pagination = ({
   if (totalPaginas <= 1) return null;
 
   const getVisiblePages = () => {
-    const delta = 2;
-    const range = [];
+    if (totalPaginas <= 5) {
+      return Array.from({ length: totalPaginas }, (_, i) => i + 1);
+    }
+
     const rangeWithDots = [];
+    const delta = 1;
+
+    rangeWithDots.push(1);
+
+    if (paginaAtual - delta > 2) {
+      rangeWithDots.push("...");
+    }
 
     for (
       let i = Math.max(2, paginaAtual - delta);
       i <= Math.min(totalPaginas - 1, paginaAtual + delta);
       i++
     ) {
-      range.push(i);
+      rangeWithDots.push(i);
     }
-
-    if (paginaAtual - delta > 2) {
-      rangeWithDots.push(1, "...");
-    } else {
-      rangeWithDots.push(1);
-    }
-
-    rangeWithDots.push(...range);
 
     if (paginaAtual + delta < totalPaginas - 1) {
-      rangeWithDots.push("...", totalPaginas);
-    } else if (totalPaginas > 1) {
+      rangeWithDots.push("...");
+    }
+
+    if (totalPaginas > 1) {
       rangeWithDots.push(totalPaginas);
     }
 

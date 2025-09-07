@@ -1,36 +1,42 @@
 import { useState, useEffect } from "react";
 import { api } from "../services/api";
 
-export const usePeople = (searchParams = {}) => {
+export const usePeople = (parametrosIniciais = {}) => {
   const [people, setPeople] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
   const [pagination, setPagination] = useState({
-    page: 1,
+    page: 0,
     limit: 10,
     totalRegistros: 0,
     totalPaginas: 1,
   });
+  const [searchParams, setSearchParams] = useState(parametrosIniciais);
 
   const fetchPeople = async (params = {}) => {
     setLoading(true);
     setError(null);
 
     try {
+      const parametrosCombinados = { ...searchParams, ...params };
+
       const response = await api.fetchPeople({
-        ...searchParams,
-        ...params,
-        pagina: params.page != null ? params.page : pagination.page ,
-        porPagina:10,
+        ...parametrosCombinados,
+        pagina:
+          params.page != null ? params.page : params.pagina || pagination.page,
+        porPagina: 10,
       });
 
       setPeople(response.content || []);
       setPagination({
-        page: response.number, 
+        page: response.number + 1,
         limit: response.size,
         totalRegistros: response.totalElements || 0,
         totalPaginas: response.totalPages || 1,
       });
+      if (Object.keys(params).length > 0) {
+        setSearchParams(parametrosCombinados);
+      }
     } catch (err) {
       setError(err instanceof Error ? err.message : "Erro ao carregar dados");
       setPeople([]);
@@ -40,7 +46,7 @@ export const usePeople = (searchParams = {}) => {
   };
 
   useEffect(() => {
-    fetchPeople(searchParams);
+    fetchPeople(parametrosIniciais);
   }, []);
 
   return {
@@ -49,6 +55,11 @@ export const usePeople = (searchParams = {}) => {
     error,
     pagination,
     refetch: fetchPeople,
+    searchParams,
+    setSearchParams: (params) => {
+      setSearchParams(params);
+      fetchPeople(params);
+    },
   };
 };
 
