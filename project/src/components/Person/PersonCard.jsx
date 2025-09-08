@@ -50,7 +50,7 @@ export const PersonCard = ({ person }) => {
             <User className="h-4 w-4 mr-2 text-gray-400" />
             <span>
               {person.idade} anos •{" "}
-              {person.sexo === "M" ? "Masculino" : "Feminino"}
+              {person.sexo === "MASCULINO" ? "Masculino" : "Feminino"}
             </span>
           </div>
 
