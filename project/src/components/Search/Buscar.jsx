@@ -10,19 +10,62 @@ export const Buscar = ({ onSearch, loading = false }) => {
     sexo: "",
     status: "",
     local_desaparecimento: "",
-    idade: null,
+    idade: "",
     pagina: 1,
     limite: 10,
+    faixaIdadeInicial: undefined,
+    faixaIdadeFinal: undefined,
   });
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    const cleanParams = Object.fromEntries(
-      Object.entries(parametrosBusca).filter(
-        ([_, valor]) => valor !== "" && valor !== undefined
-      )
+
+    const copia = { ...parametrosBusca };
+    const idadeVal = copia.idade;
+
+    const payload = { ...copia };
+
+    if (idadeVal === "" || idadeVal === null || idadeVal === undefined) {
+      payload.faixaIdadeInicial = null;
+      payload.faixaIdadeFinal = null;
+      payload.idade = "";
+      setParametrosBusca((prev) => ({
+        ...prev,
+        idade: "",
+        faixaIdadeInicial: undefined,
+        faixaIdadeFinal: undefined,
+      }));
+    } else {
+      const idadeNum = parseInt(idadeVal, 10);
+      if (!isNaN(idadeNum)) {
+        const faixaInicial = Math.floor(idadeNum / 10) * 10;
+        payload.faixaIdadeInicial = faixaInicial;
+        payload.faixaIdadeFinal = faixaInicial + 9;
+      } else {
+        payload.faixaIdadeInicial = null;
+        payload.faixaIdadeFinal = null;
+      }
+      delete payload.idade;
+      setParametrosBusca((prev) => ({
+        ...prev,
+        faixaIdadeInicial: payload.faixaIdadeInicial,
+        faixaIdadeFinal: payload.faixaIdadeFinal,
+      }));
+    }
+
+    const parametrosFinais = Object.fromEntries(
+      Object.entries(payload).filter(([_, v]) => v !== "" && v !== undefined)
     );
-    onSearch({ ...cleanParams, pagina: 1 });
+
+    if (idadeVal === "" || idadeVal === null || idadeVal === undefined) {
+      parametrosFinais.faixaIdadeInicial = null;
+      parametrosFinais.faixaIdadeFinal = null;
+      parametrosFinais.idade = "";
+    }
+
+    parametrosFinais.pagina = 1;
+
+    onSearch(parametrosFinais);
   };
 
   const handleClear = () => {
@@ -34,16 +77,45 @@ export const Buscar = ({ onSearch, loading = false }) => {
       status: "",
       nome: "",
       local_desaparecimento: "",
+      faixaIdadeInicial: null,
+      faixaIdadeFinal: null,
     };
-    setParametrosBusca(clearedParams);
+    setParametrosBusca({
+      nome: "",
+      sexo: "",
+      status: "",
+      local_desaparecimento: "",
+      idade: "",
+      pagina: 1,
+      limite: 10,
+      faixaIdadeInicial: undefined,
+      faixaIdadeFinal: undefined,
+    });
     onSearch(clearedParams);
   };
 
-  const atualizarParametro = (chave , valor) => {
-    setParametrosBusca((prev) => ({
-      ...prev,
-      [chave  ]: valor || "",
-    }));
+  const atualizarParametro = (chave, valor) => {
+    setParametrosBusca((prev) => {
+      if (chave === "idade") {
+        if (valor === "" || valor === null || valor === undefined) {
+          return {
+            ...prev,
+            idade: "",
+            faixaIdadeInicial: undefined,
+            faixaIdadeFinal: undefined,
+          };
+        }
+        return {
+          ...prev,
+          idade: valor,
+        };
+      }
+
+      return {
+        ...prev,
+        [chave]: valor !== undefined && valor !== null ? valor : "",
+      };
+    });
   };
 
   return (
