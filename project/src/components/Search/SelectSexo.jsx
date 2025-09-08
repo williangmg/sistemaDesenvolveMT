@@ -11,7 +11,6 @@ const SelectSexo = ({ value, onChange }) => (
       <option value="">Selecione o sexo</option>
       <option value="MASCULINO">Masculino</option>
       <option value="FEMININO">Feminino</option>
-      <option value="OUTRO">Outro</option>
     </select>
   </div>
 );
